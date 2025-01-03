@@ -8,7 +8,11 @@
 */
 #include "driver/ledc.h"
 #include "esp_err.h"
+#include "esp_log.h"
+#include "nvs_flash.h"
 #include <stdio.h>
+
+#include "wifi.h"
 
 #define LEDC_TIMER LEDC_TIMER_0
 #define LEDC_MODE LEDC_LOW_SPEED_MODE
@@ -70,6 +74,18 @@ static void example_ledc_init(void) {
 }
 
 void app_main(void) {
+
+    // Initialize NVS
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES ||
+        ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+
+    dpp_enrollee_init();
+
     // Set the LEDC peripheral configuration
     example_ledc_init();
     // Set duty to 50%
