@@ -148,7 +148,7 @@ esp_err_t dpp_enrollee_bootstrap(void) {
     return ret;
 }
 
-void dpp_enrollee_init(void) {
+void wifi_init(void) {
     s_dpp_event_group = xEventGroupCreate();
 
     ESP_ERROR_CHECK(esp_netif_init());

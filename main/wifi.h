@@ -1,2 +1,2 @@
 
-void dpp_enrollee_init(void);
+void wifi_init(void);
