@@ -26,7 +26,6 @@ void app_main(void) {
     }
     ESP_ERROR_CHECK(ret);
 
-    led_init();
     wifi_init();
     http_init();
 
